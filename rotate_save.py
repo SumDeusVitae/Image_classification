@@ -28,7 +28,7 @@ def main(path: str) -> None:
 
 
 parser = argparse.ArgumentParser(description = 'rotates and saves images')
-parser.add_argument('path', metavar = 'path', type=str, help='*.data path')
+parser.add_argument('path', metavar = 'path', type=str, help='*. path to the folder')
 args = parser.parse_args()
 path = args.path
 main(path)
