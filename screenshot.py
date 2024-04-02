@@ -25,7 +25,7 @@ def main() -> None:
             time.sleep(1)
         if keyboard.is_pressed('d'):
             cur_time = time.localtime()
-            win32api.MessageBox(0, 'Press "y" to delete all or "n" to terminate', 'Notification')
+            win32api.MessageBox(0, 'Press "y" to delete all or "n" to terminate', 'Confirmation')
             while(True):
                 if keyboard.is_pressed('y'):
                     dir_list = os.listdir('./images')
