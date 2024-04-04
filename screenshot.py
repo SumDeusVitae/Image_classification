@@ -68,14 +68,14 @@ def active_window_screenshot() -> None:
     print(f'Window: {active.title}, Bbox: {active_window_region}')
     screenshot: object = ImageGrab.grab(bbox=active_window_region)
     # screen = pyautogui.screenshot(region = active_window_region)
-    path_name: str = fr'images/screenshot{t.tm_hour}{t.tm_min}{t.tm_sec}.png'
-    # Saving screenshot
-    try:
-        screenshot.save(path_name)
-    except FileNotFoundError:
-        os.mkdir('images')
-        print('Created directory images')
-        screenshot.save(path_name)
+    screenshot_name: str = fr'screenshot{t.tm_hour}{t.tm_min}{t.tm_sec}.png'
+    # checking if path exist and saving screenshot
+    check_create_dir('images')
+    final_dir: str = fr'images/{t.tm_mon if t.tm_mon>9 else '0'+str(t.tm_mon)}_{t.tm_mday if t.tm_mday>9 else '0'+str(t.tm_mday)}_{t.tm_year}'
+    check_create_dir(final_dir)
+    final_path: str = fr'{final_dir}/{screenshot_name}'
+    screenshot.save(final_path)
+
 
 """
 def delete():
@@ -91,7 +91,12 @@ def exiting() -> None:
     print('Bye-Bye')
     os._exit(0)
 
-def main() -> None:
+def check_create_dir(path: str) -> None:
+    if(not os.path.isdir(path)):
+        os.mkdir(path)
+
+
+def main() -> None:    
     keyboard.add_hotkey('ctrl+s', active_window_screenshot)
     # keyboard.add_hotkey('ctrl+d', delete)
     keyboard.add_hotkey('ctrl+q', exiting)
